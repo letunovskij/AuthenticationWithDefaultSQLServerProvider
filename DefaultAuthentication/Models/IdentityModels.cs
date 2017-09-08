@@ -25,8 +25,6 @@ namespace DefaultAuthentication.Models
     [Table("user_info")]
     public class ApplicationUserInfo
     {
-
-        [Key]
         [Display(Name = "ФИО")]
         [StringLength(200, ErrorMessage = "Значение не должно превышать 200 символов")]
         public string FullName { get; set; }

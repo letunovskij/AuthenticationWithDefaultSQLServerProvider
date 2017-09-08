@@ -60,6 +60,9 @@ namespace DefaultAuthentication.Models
 
         [Display(Name = "Запомнить меня")]
         public bool RememberMe { get; set; }
+
+        [Display(Name = "ФИО")]
+        public string FullName { get; set; }
     }
 
     public class RegisterViewModel
@@ -79,6 +82,10 @@ namespace DefaultAuthentication.Models
         [Display(Name = "Подтверждение пароля")]
         [Compare("Password", ErrorMessage = "Пароль и его подтверждение не совпадают.")]
         public string ConfirmPassword { get; set; }
+
+        [Display(Name = "ФИО")]
+        [StringLength(200, ErrorMessage = "Значение не должно превышать 200 символов")]
+        public string FullName { get; set; }
     }
 
     public class ResetPasswordViewModel

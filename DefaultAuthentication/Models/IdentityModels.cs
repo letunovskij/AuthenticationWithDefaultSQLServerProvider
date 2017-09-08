@@ -3,12 +3,16 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DefaultAuthentication.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
+        public virtual ApplicationUserInfo ApplicationUserInfo { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Обратите внимание, что authenticationType должен совпадать с типом, определенным в CookieAuthenticationOptions.AuthenticationType
@@ -16,6 +20,16 @@ namespace DefaultAuthentication.Models
             // Здесь добавьте утверждения пользователя
             return userIdentity;
         }
+    }
+
+    [Table("user_info")]
+    public class ApplicationUserInfo
+    {
+
+        [Key]
+        [Display(Name = "ФИО")]
+        [StringLength(200, ErrorMessage = "Значение не должно превышать 200 символов")]
+        public string FullName { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
